@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Visualizaciones</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn { margin: 5px; padding: 5px 10px; text-decoration: none; color: white; }
+        .editar { background-color: #007BFF; }
+        .borrar { background-color: #DC3545; }
+        .agregar { background-color: #28A745; display: inline-block; margin: 10px 0; padding: 10px 15px; color: white; text-decoration: none; }
+        .completado { color: green; font-weight: bold; }
+        .incompleto { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>Listado de Visualizaciones</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Visualización</th>
+                <th>ID Usuario</th>
+                <th>ID Contenido</th>
+                <th>Tipo de Contenido</th>
+                <th>Fecha Visualización</th>
+                <th>Completado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for visualizacion in visualizaciones %}
+            <tr>
+                <td>{{ visualizacion.id }}</td>
+                <td>{{ visualizacion.id_usuario }}</td>
+                <td>{{ visualizacion.id_contenido }}</td>
+                <td>{{ visualizacion.tipo_contenido }}</td>
+                <td>{{ visualizacion.fecha_visualizacion|date:"Y-m-d H:i" }}</td>
+                <td>
+                    {% if visualizacion.completado %}
+                        <span class="completado">Sí</span>
+                    {% else %}
+                        <span class="incompleto">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/editar/{{ visualizacion.id }}/" class="btn editar">Editar</a>
+                    <a href="/borrar/{{ visualizacion.id }}/" class="btn borrar">Borrar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay visualizaciones registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/agregar/" class="btn agregar">Agregar Visualización</a>
+</body>
+</html>

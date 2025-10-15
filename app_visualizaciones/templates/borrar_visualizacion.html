@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Borrado de Visualización</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .btn { padding: 10px 15px; text-decoration: none; color: white; margin: 5px; }
+        .confirmar { background-color: #DC3545; }
+        .cancelar { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+    <h1>¿Estás seguro de borrar esta visualización?</h1>
+    <p>ID Visualización: {{ visualizacion.id }}</p>
+    <p>ID Usuario: {{ visualizacion.id_usuario }}</p>
+    <p>ID Contenido: {{ visualizacion.id_contenido }}</p>
+    <p>Tipo de Contenido: {{ visualizacion.tipo_contenido }}</p>
+    <p>Fecha Visualización: {{ visualizacion.fecha_visualizacion|date:"Y-m-d H:i" }}</p>
+    <p>Completado: {% if visualizacion.completado %}Sí{% else %}No{% endif %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn confirmar">Sí, Borrar</button>
+    </form>
+    <a href="/">Cancelar</a>
+</body>
+</html>
